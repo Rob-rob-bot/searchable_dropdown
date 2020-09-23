@@ -137,6 +137,9 @@ class DropdownSearch<T> extends StatefulWidget {
   ///set a custom color for the popup barrier
   final Color popupBarrierColor;
 
+  /// what to execute when tap on field
+  final Function onFocus;
+
   DropdownSearch({
     Key key,
     this.onSaved,
@@ -175,6 +178,7 @@ class DropdownSearch<T> extends StatefulWidget {
     this.popupShape,
     this.popupItemDisabled,
     this.popupBarrierColor,
+    this.onFocus,
   })  : assert(autoValidate != null),
         assert(isFilteredOnline != null),
         assert(dropdownBuilderSupportsNullItem != null),
@@ -423,6 +427,7 @@ class _DropdownSearchState<T> extends State<DropdownSearch<T>> {
     if (isFocused && !_isFocused.value) {
       FocusScope.of(context).unfocus();
       _isFocused.value = true;
+      if (widget.onFocus != null) widget.onFocus();
     } else if (!isFocused && _isFocused.value) _isFocused.value = false;
   }
 
