@@ -26,6 +26,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final _formKey = GlobalKey<FormState>();
 
+  final GlobalKey key = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,11 +55,15 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Divider(),
               DropdownSearch<UserModel>(
-                mode: Mode.BOTTOM_SHEET,
+                key: key,
+                mode: Mode.MENU,
                 isFilteredOnline: true,
                 showClearButton: true,
                 showSearchBox: true,
                 label: 'User *',
+                onFocus: () => Scrollable.ensureVisible(key.currentContext,
+                    duration: Duration(milliseconds: 200),
+                    alignmentPolicy: ScrollPositionAlignmentPolicy.explicit),
                 dropdownSearchDecoration: InputDecoration(
                     filled: true,
                     fillColor:
@@ -128,6 +134,62 @@ class _MyHomePageState extends State<MyHomePage> {
                     topRight: Radius.circular(24),
                   ),
                 ),
+              ),
+              Divider(),
+
+              ///merge online and offline data in the same list and set custom max Height
+              DropdownSearch<UserModel>(
+                items: [
+                  UserModel(name: "Offline name1", id: "999"),
+                  UserModel(name: "Offline name2", id: "0101")
+                ],
+                maxHeight: 300,
+                onFind: (String filter) => getData(filter),
+                label: "choose a user",
+                onChanged: print,
+                showSearchBox: true,
+              ),
+              Divider(),
+
+              ///merge online and offline data in the same list and set custom max Height
+              DropdownSearch<UserModel>(
+                items: [
+                  UserModel(name: "Offline name1", id: "999"),
+                  UserModel(name: "Offline name2", id: "0101")
+                ],
+                maxHeight: 300,
+                onFind: (String filter) => getData(filter),
+                label: "choose a user",
+                onChanged: print,
+                showSearchBox: true,
+              ),
+              Divider(),
+
+              ///merge online and offline data in the same list and set custom max Height
+              DropdownSearch<UserModel>(
+                items: [
+                  UserModel(name: "Offline name1", id: "999"),
+                  UserModel(name: "Offline name2", id: "0101")
+                ],
+                maxHeight: 300,
+                onFind: (String filter) => getData(filter),
+                label: "choose a user",
+                onChanged: print,
+                showSearchBox: true,
+              ),
+              Divider(),
+
+              ///merge online and offline data in the same list and set custom max Height
+              DropdownSearch<UserModel>(
+                items: [
+                  UserModel(name: "Offline name1", id: "999"),
+                  UserModel(name: "Offline name2", id: "0101")
+                ],
+                maxHeight: 300,
+                onFind: (String filter) => getData(filter),
+                label: "choose a user",
+                onChanged: print,
+                showSearchBox: true,
               ),
               Divider(),
 
